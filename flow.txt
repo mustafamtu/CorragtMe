@@ -1,0 +1,16 @@
+[1. Kullanıcı Sorusu]
+         │
+         ▼
+[2. ChromaDB Vektör Arama] ──► (Örn: En yakın 3 chunk çekildi)
+         │
+         ▼
+[3. Gemini 2.5 Flash (Grader / Router)]
+    ├── Soru 1: Bu chunk soruyla alakalı mı? (Binary: Evet/Hayır)
+    ├── Soru 2: Çekilen veri soruyu çözmeye yetiyor mu? (Puan: 0.0 - 1.0)
+    └── Soru 3: Web aramasına ihtiyaç var mı? (Binary: Evet/Hayır)
+         │
+         ├──► [YETERLİ / ALAKALI]: 
+         │         └── Sadece onaylı chunk'ları al ──► [4. Gemini Sentez (Nihai Cevap)]
+         │
+         └──► [YETERSİZ / ÇÖP]: 
+                   └── Tool: Web Arama (Tavily/DDG) ──► [4. Gemini Sentez (Nihai Cevap + Kaynak)]

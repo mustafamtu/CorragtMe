@@ -25,3 +25,5 @@ print(en_yakin_sonuc)
 
 if en_yakin_sonuc > 0.50:
     pass
+    # Eğer en yakın sonucun vektörü 0.50'den büyükse bu konumda tavily search'e yönlendirilip
+    # internet aracılığıyla veriler tespit edilecek

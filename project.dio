@@ -28,7 +28,7 @@
                         <mxPoint x="510" y="290" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="TurJRP8YMChR8BIaSLMu-11" connectable="0" parent="TurJRP8YMChR8BIaSLMu-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="50&#39;den&amp;nbsp;&lt;div&gt;büyükse&lt;/div&gt;" vertex="1">
+                <mxCell id="TurJRP8YMChR8BIaSLMu-11" connectable="0" parent="TurJRP8YMChR8BIaSLMu-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="alakalı&lt;div&gt;ise&lt;/div&gt;" vertex="1">
                     <mxGeometry relative="1" x="-0.0983" y="-1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
@@ -38,7 +38,7 @@
                         <mxPoint x="309.9999999999999" y="290" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="TurJRP8YMChR8BIaSLMu-12" connectable="0" parent="TurJRP8YMChR8BIaSLMu-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="50&#39;den&lt;div&gt;küçükse&lt;/div&gt;" vertex="1">
+                <mxCell id="TurJRP8YMChR8BIaSLMu-12" connectable="0" parent="TurJRP8YMChR8BIaSLMu-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="alakasız&lt;div&gt;ise&lt;/div&gt;" vertex="1">
                     <mxGeometry relative="1" x="-0.0604" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>

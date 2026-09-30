@@ -2,6 +2,7 @@ import chromadb
 from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_tavily import TavilySearch
 from pydantic import BaseModel,Field
 
 load_dotenv()
@@ -22,8 +23,6 @@ sonuclar = koleksiyon.query(query_embeddings=[soru_vektoru], n_results=3)
 
 metinler = "\n\n".join(sonuclar['documents'][0])
 
-print(f"Metinler: {metinler}, Vektör Skorları: {sonuclar['distances'][0]}")
-
 LLM = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 system_prompt = f"""
@@ -36,7 +35,7 @@ system_prompt = f"""
     KURALLAR:
     1. Kendi genel kültürünü veya dış bilgini kesinlikle kullanma.
     2. Sadece verilen metinlere sadık kal.
-    3. Cevap metinde açıkça yoksa, üstünkörü geçiyorsa veya eksik kalıyorsa bunu yetersiz olarak değerlendir.
+    3. Cevap metinde açıkça yoksa, üstünkörü geçiyorsa veya eksik kalıyorsa bunu yetersiz olarak değerlendir.q
     """
 
 prompt = ChatPromptTemplate.from_messages([
@@ -66,3 +65,23 @@ karar = chain.invoke({
 
 print(f"Sonuç: {karar.yeterli_mi}")
 print(f"Gerekçe: {karar.gerekce}")
+
+if karar.yeterli_mi == False:
+    print("*" * 50)
+    print("Yeterli bilgi bulunamadı. Aşağıdaki arama sonuçlarını inceleyerek sorunuza yanıt bulmaya çalışın.")
+    tavily_search = TavilySearch(max_results=3, search_engine="google", language="tr", description="Kullanıcının sorusuna yanıt verecek yeterli bilgi bulunamadı. Lütfen aşağıdaki arama sonuçlarını inceleyin ve sorunuza yanıt bulmaya çalışın.")
+    arama_sonuclari = tavily_search.invoke({"query": soru})
+
+    parcalar = []
+    site_linkleri = []
+    
+    for sonuc in arama_sonuclari["results"]:
+        url = sonuc.get("url")
+        icerik = sonuc.get("content")
+        
+        parcalar.append(f"Kaynak ({url}):\n{icerik}")
+        site_linkleri.append(url)
+        
+    final_baglam = "\n\n---\n\n".join(parcalar)
+    print(f"Arama Sonuçları:\n{final_baglam}")
+    #"Veri ihlali durumunda Kurul'a kaç saat içinde bildirim yapılmalıdır ve bildirim formu nereden indirilir?"
